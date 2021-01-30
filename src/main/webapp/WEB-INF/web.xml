@@ -5,14 +5,4 @@
         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
         metadata-complete="false"
         version="3.1">
-
-    <servlet>
-        <servlet-name>Hello</servlet-name>
-        <servlet-class>io.github.mat3e.HelloServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Hello</servlet-name>
-        <url-pattern>/api/*</url-pattern>
-    </servlet-mapping>
-
 </web-app>
