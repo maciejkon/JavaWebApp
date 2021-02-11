@@ -26,6 +26,8 @@ public class App {
                 new JettyWebXmlConfiguration()
         });
         webapp.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern", ".*/classes/.*");
+        webapp.setInitParameter("org.eclipse.jetty.servlet.Default.maxCachedFiles", "0");
+
         //webapp.addServlet(HelloServlet.class,"/api/*");
 
         var server = new Server(8080);

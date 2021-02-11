@@ -1,4 +1,4 @@
-package io.github.mat3e;
+package io.github.mat3e.lang;
 
 import org.hibernate.annotations.GenericGenerator;
 
