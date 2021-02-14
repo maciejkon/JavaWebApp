@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet(name = "Hello", urlPatterns = {"/api"})
-public class    HelloServlet extends HttpServlet {
+public class HelloServlet extends HttpServlet {
     private final static String NAME_PARAM = "name";
     private final static String LANG_PARAM = "lang";
 
@@ -23,18 +24,25 @@ public class    HelloServlet extends HttpServlet {
      * servlet container needs it
      */
     @SuppressWarnings("unused")
-    public HelloServlet(){
+    public HelloServlet() {
         this(new HelloService());
     }
 
-    HelloServlet(HelloService service){
-        this.service=service;
+    HelloServlet(HelloService service) {
+        this.service = service;
     }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("Got request with parameters " + req.getParameterMap());
         var name = req.getParameter(NAME_PARAM);
         var lang = req.getParameter(LANG_PARAM);
-        resp.getWriter().write(service.prepareGreeting(name,lang));
+        Integer langId = null;
+        try {
+            langId = Integer.valueOf(lang);
+        } catch (NumberFormatException e) {
+            logger.warn("Non-numeric language id used: " + lang);
+        }
+        resp.getWriter().write(service.prepareGreeting(name, langId));
     }
 }
